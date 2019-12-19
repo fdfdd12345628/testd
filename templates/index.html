@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    <nav class="navbar navbar-expand-lg " id="header">
+        <a class="navbar-brand" href="#" id="header">
+            <img src="{% static "img/satellite.svg" %}" style="height: 30px; width: 30px;" id="connect" alt="">
+            SMART BELT
+        </a>
+        <div class="navbar-right" href="#">
+
+            <img class="navbar-brand" src="{% static "img/search.svg" %}" style="height: 30px; width: 30px;" alt="">
+
+            <img class="navbar-brand" src="{% static "img/avatar.svg" %}" style="height: 29px; width: 30px;" alt="">
+        </div>
+
+        <!--button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button-->
+
+    </nav>
+    <ul class="nav nav-pills nav-justified" id="header">
+        <li class="nav-item">
+            <a class="nav-link active" href="#date-container" id="datetime" data-toggle="tab"
+            >Date&Time</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#health-container" id="health" data-toggle="tab"
+            >Health</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#help-container" id="help" data-toggle="tab">Help</a>
+        </li>
+
+    </ul>
+    <div class="tab-content tab-container">
+        <div class="container tab-pane " id="health-container">
+            <div class="row text-center">
+                <div class="col align-self-start flex-column" id="white-container">
+                    <img class="p-2 menu-image" id="exercise-button" src="{% static "img/body.svg" %}" alt="">
+                    <div class="p-2">Body Data</div>
+                </div>
+                <div class="col align-self-end flex-column" id="black-container">
+                    <img class="p-2 menu-image" id="" src="{% static "img/foot.svg" %}" alt="">
+                    <div class="p-2">Exercise Data</div>
+                </div>
+            </div>
+            <div class="row text-center ">
+                <div class="col align-self-start flex-column" id="black-container">
+                    <img class="p-2 menu-image" id="" src="{% static "img/notification.svg" %}" alt="">
+                    <div class="p-2">Remind</div>
+                </div>
+                <div class="col align-self-end flex-column" id="white-container">
+                    <img class="p-2 menu-image" id="" src="{% static "img/measure.svg" %}" alt="">
+                    <div class="p-2">Standard</div>
+                </div>
+            </div>
+        </div>
+        <div class="container tab-pane " id="date-container">
+            <canvas id="chart">
+
+            </canvas>
+        </div>
+        <div class="container tab-pane " id="help-container">nothing too</div>
+    </div>
+    <div class="fullscreen-container not-active" id="exercise-record">
+        <nav class="navbar navbar-expand-lg" id="header">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'img/arrow.svg' %}" id="back" style="height: 30px; width: 30px;" alt="">
+
+            </a>
+            <div class="">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        Exercise Data
+                    </li>
+                </ul>
+            </div>
+
+            <div class="navbar-right" href="#">
+
+                <img class="navbar-brand" src="{% static "img/search.svg" %}" style="height: 30px; width: 30px;" alt="">
+
+                <img class="navbar-brand" src="{% static "img/avatar.svg" %}" style="height: 29px; width: 30px;" alt="">
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col"
+                     style="height: 45vh; display: flex; justify-content: space-evenly; align-items: center;">
+                    <div class="meter-container" id="meter">
+
+                    </div>
+                    <div id="meter-text">
+                        10000<br>
+                        steps
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" id="exercise-container-dark"
+                     style="display: flex; align-items: center; justify-content: space-around">
+                    <div style="position: absolute; top:5px; left: 5px">Step time</div>
+                    <div style="font-size: 30px">45</div>
+                    <div style="position: absolute; bottom: 5px;right: 5px;">min(s)</div>
+                </div>
+                <div class="col" id="exercise-container-light"
+                     style="display: flex; align-items: center; justify-content: space-around">
+                    <div style="position: absolute; top:5px; left: 5px">Step Distance</div>
+                    <div style="font-size: 30px">1.8</div>
+                    <div style="position: absolute; bottom: 5px;right: 5px;">km(s)</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" id="exercise-container-light"
+                     style="display: flex; align-items: center; justify-content: space-around">
+                    <div style="position: absolute; top:5px; left: 5px">Calories Burned</div>
+                    <div style="font-size: 30px">400</div>
+                    <div style="position: absolute; bottom: 5px;right: 5px;">kcal(s)</div>
+                </div>
+                <div class="col" id="exercise-container-dark"
+                     style="display: flex; align-items: center; justify-content: space-around">
+                    <div style="position: absolute; top:5px; left: 5px">Cumulative Days</div>
+                    <div style="font-size: 30px">3</div>
+                    <div style="position: absolute; bottom: 5px;right: 5px;">day(s)</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" id="exercise-container-light"
+                     style="height: 8vh; display: flex; justify-content: space-around; align-items: center">
+                    <img src="{% static 'img/add.svg' %}" style="height: 30px; width: 30px">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+    </script>
+    <link rel="stylesheet" href="{% static "index.css" %}" crossorigin="anonymous">
+    <script type="text/javascript" src="{% static "index.js" %}"></script>
+    <script type="text/javascript" src="{% static "circular.js" %}"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+{% endblock %}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80.667 80.666">
+    <title>Asset 5</title>
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_1-2" data-name="Layer 1">
+            <path d="M56.22,34.155A16.346,16.346,0,0,1,40.334,50.924,16.344,16.344,0,0,1,24.448,34.155,16.344,16.344,0,0,1,40.334,17.386,16.346,16.346,0,0,1,56.22,34.155Z"
+                  style="fill:none;stroke:#65616f;stroke-miterlimit:10;stroke-width:3px"/>
+            <path d="M40.334,79.166A38.726,38.726,0,0,0,69.062,66.457a34.327,34.327,0,0,0-57.457,0A38.73,38.73,0,0,0,40.334,79.166Z"
+                  style="fill:none;stroke:#65616f;stroke-miterlimit:10;stroke-width:3px"/>
+            <path d="M79.167,40.333A38.834,38.834,0,1,1,40.334,1.5,38.833,38.833,0,0,1,79.167,40.333Z"
+                  style="fill:none;stroke:#65616f;stroke-miterlimit:10;stroke-width:3px"/>
+        </g>
+    </g>
+</svg>

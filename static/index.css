@@ -1,0 +1,106 @@
+:root {
+    --main-bg-color: #FFFFFF;
+    --main-dark-color: #65616F;
+    --main-color: #F9F1E7;
+    --shadow-color: #e8e8ea
+}
+
+#header {
+    color: var(--main-dark-color);
+    background-color: var(--main-color);
+}
+
+.nav-link {
+    color: var(--shadow-color);
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--main-bg-color);
+    color: var(--main-dark-color);
+}
+
+a:hover {
+    color: #65616F;
+}
+
+.main-container {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+#white-container {
+    color: var(--main-dark-color);
+    background: var(--shadow-color);
+    border-radius: 35px;
+    height: 35vh;
+    margin: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#black-container {
+    color: var(--main-bg-color);
+    background: var(--main-dark-color);
+    border-radius: 35px;
+    height: 35vh;
+    margin: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fullscreen-container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: var(--main-bg-color);
+}
+
+.not-active {
+    display: none;
+}
+
+.tab-container {
+    top: 15vh;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+}
+
+.menu-image {
+    width: 60%;
+    height: 60%;
+    vertical-align: center;
+    color: var(--main-dark-color)
+}
+
+#exercise-container-dark {
+    height: 15vh;
+    color: var(--main-color);
+    background-color: var(--main-dark-color);
+    margin: 1vh;
+    border-radius: 10%;
+}
+
+#exercise-container-light {
+    height: 15vh;
+    color: var(--main-dark-color);
+    background-color: var(--shadow-color);
+    margin: 1vh;
+    border-radius: 10%;
+}
+
+#meter-text {
+    position: absolute;
+    text-align: center;
+    font-size: 25px;
+    line-height: 20px;
+}
+
+body {
+    overflow: scroll;
+}
