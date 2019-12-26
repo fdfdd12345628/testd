@@ -1,4 +1,4 @@
-var currentStep = 0;
+currentStep = 0;
 
 $(document).ready(function () {
     var connected = false;
@@ -14,6 +14,7 @@ $(document).ready(function () {
     $.getJSON('getdata', function (data) {
         userData = data;
         console.log(data);
+        currentStep = data['current_walk']
     })
     date_button.addEventListener('click', function () {
         if (date_button.classList.contains('active')) {
@@ -69,8 +70,9 @@ $(document).ready(function () {
         } else console.log(data)
     };
     var updateHTMLCounter = setInterval(function () {
+        stepText.innerHTML = (currentStep.toString() + "<br>steps");
 
-    }, 100);
+    }, 500);
     var postCounter = setInterval(function () {
         let data = {
             'steps': currentStep,
@@ -86,22 +88,22 @@ $(document).ready(function () {
             contentType: "application/json",
             dataType: 'json'
         });
-    }, 1000);
+    }, 2000);
     var ctx = document.getElementById('chart').getContext('2d');
     var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: ['12/14', '12/15', '12/16', '12/17', '12/18', '12/19'],
             datasets: [{
                 label: '# of Votes',
                 data: [5000, 5500, 6000, 8000, 4500, 6500],
                 backgroundColor: [
+                    'rgba(0, 0, 0, 1)',
+                    /*'rgba(101, 97, 111, 1)',
                     'rgba(101, 97, 111, 1)',
                     'rgba(101, 97, 111, 1)',
                     'rgba(101, 97, 111, 1)',
-                    'rgba(101, 97, 111, 1)',
-                    'rgba(101, 97, 111, 1)',
-                    'rgba(101, 97, 111, 1)',
+                    'rgba(101, 97, 111, 1)',*/
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -115,10 +117,22 @@ $(document).ready(function () {
             }]
         },
         options: {
+            responsive: true,
+            responsiveAnimationDuration: 100,
+
             scales: {
+                xAxes: [{
+                    gridLines: {
+                        display: false
+                    }
+                }],
                 yAxes: [{
+
                     ticks: {
                         beginAtZero: true
+                    },
+                    gridLines: {
+                        display: false
                     }
                 }]
             }

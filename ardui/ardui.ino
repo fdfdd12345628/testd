@@ -1,6 +1,6 @@
 #include<SoftwareSerial.h>
 
-SoftwareSerial BT(8, 9); // 接收腳, 傳送腳
+SoftwareSerial BT(11, 10); // 接收腳, 傳送腳
 char val;  // 儲存接收資料的變數
 
 void setup() {
