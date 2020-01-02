@@ -11,12 +11,15 @@
 }
 
 .nav-link {
-    color: var(--shadow-color);
+    color: var(--main-dark-color);
 }
 
 .nav-pills .nav-link.active {
-    background-color: var(--main-bg-color);
+    background-color: var(--main-color);
     color: var(--main-dark-color);
+    border: var(--main-dark-color) solid;
+    border-width: 0 0 2px 0;
+    border-radius: 0;
 }
 
 a:hover {
@@ -64,7 +67,7 @@ a:hover {
 }
 
 .tab-container {
-    top: 15vh;
+    top: 6.5em;
     height: auto;
     position: absolute;
     bottom: 0;

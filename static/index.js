@@ -172,8 +172,12 @@ $(document).ready(function () {
         var exerciseDistanceUnit = document.getElementById('exercise-distance-unit');
         var caloriesBurnedText = document.getElementById('calories-burned-text');
         var caloriesBurned = document.getElementById('calories-burned');
-
+        var stepDistance = document.getElementById('step-distance');
+        var stepCalories = document.getElementById('step-calories');
+        progress1.update([parseInt(currentStep / 100)]);
         stepText.innerHTML = (currentStep.toString() + "<br>steps");
+        stepDistance.innerHTML = (currentStep * 0.00008).toFixed(3);
+        stepCalories.innerHTML = (currentStep * 0.1).toFixed(2);
         if (currentExerciseStatus == 1) {
             currentExerciseText.innerHTML = "Current Sit-Uping";
             if (currentExerciseOKorBad == 1) {
@@ -211,7 +215,7 @@ $(document).ready(function () {
                 currentExerciseStatusText.innerText = "Good speed";
             }
             exerciseDistanceText.innerHTML = 'Distance';
-            exerciseDistance.innerHTML = ((currentExerciseBadStep + currentExerciseOKStep) * 0.08).toFixed(3);
+            exerciseDistance.innerHTML = ((currentExerciseBadStep + currentExerciseOKStep) * 0.00008).toFixed(3);
             exerciseDistanceUnit.innerHTML = 'km(s)';
             caloriesBurned.innerHTML = ((currentExerciseOKStep + currentExerciseBadStep) * 0.02).toFixed(3);
 
