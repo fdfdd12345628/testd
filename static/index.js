@@ -97,6 +97,7 @@ $(document).ready(function () {
         currentExerciseStatus = 1;
         currentExerciseBadStep = 0;
         currentExerciseOKStep = 0;
+        terminal.send('start_situp');
         startSquatButton.classList.toggle('not-active');
         startSitupButton.classList.toggle('not-active');
         startRunningButton.classList.toggle('not-active');
@@ -107,6 +108,7 @@ $(document).ready(function () {
         currentExerciseStatus = 2;
         currentExerciseOKStep = 0;
         currentExerciseBadStep = 0;
+        terminal.send('start_squat');
         startSquatButton.classList.toggle('not-active');
         startSitupButton.classList.toggle('not-active');
         startRunningButton.classList.toggle('not-active');
@@ -117,6 +119,7 @@ $(document).ready(function () {
         currentExerciseStatus = 3;
         currentExerciseBadStep = 0;
         currentExerciseOKStep = 0;
+        terminal.send('start_running');
         startSquatButton.classList.toggle('not-active');
         startSitupButton.classList.toggle('not-active');
         startRunningButton.classList.toggle('not-active');
@@ -124,6 +127,13 @@ $(document).ready(function () {
     });
 
     endExerciseButton.addEventListener('click', function () {
+        if (currentExerciseStatus == 1) {
+            terminal.send('stop_situp');
+        } else if (currentExerciseStatus == 2) {
+            terminal.send('stop_squat');
+        } else if (currentExerciseStatus == 3) {
+            terminal.send('stop_running');
+        }
         currentExerciseStatus = 0;
         startSquatButton.classList.toggle('not-active');
         startSitupButton.classList.toggle('not-active');
