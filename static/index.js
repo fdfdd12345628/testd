@@ -1,5 +1,7 @@
 currentStep = 0;
-
+currentExerciseStep = 0;
+currentExerciseSpeed = '';
+currentExerciseStatus = 0;
 $(document).ready(function () {
     var connected = false;
 
@@ -10,11 +12,25 @@ $(document).ready(function () {
     let date_button = document.getElementById("datetime");
     let health_button = document.getElementById("health");
     let help_button = document.getElementById("help");
+    var charts = document.getElementById('meter');
+    var stepText = document.getElementById("meter-text");
+    var exerciseContainer = document.getElementById('exercise-record');
+    var exerciseButton = document.getElementById('exercise-data-button');
+    var exerciseBack = document.getElementById('back');
+    var startExerciseButton = document.getElementById('start-exercise-button');
+    var startExerciseContainer = document.getElementById('start-exercise');
+    var startExerciseBack = document.getElementById('start-exercise-back');
+    var bodyDataBack = document.getElementById('body-data-back');
+    var bodyDataContainer = document.getElementById('body-data');
+    var bodyDataButton = document.getElementById('body-data-button');
+    var dark_color = getComputedStyle(document.documentElement)
+        .getPropertyValue('--main-dark-color');
     var userData = {}
     $.getJSON('getdata', function (data) {
         userData = data;
         console.log(data);
         currentStep = data['current_walk']
+
     })
     date_button.addEventListener('click', function () {
         if (date_button.classList.contains('active')) {
@@ -31,30 +47,34 @@ $(document).ready(function () {
         }
     });
     help_button.addEventListener('click', function () {
-        if (help_button.classList.contains('active')) {
+        if (help_container.classList.contains('active')) {
             help_container.classList.add('active')
         } else {
             help_container.classList.remove('active')
         }
     });
-    var charts = document.getElementById('meter');
-    var dark_color = getComputedStyle(document.documentElement)
-        .getPropertyValue('--main-dark-color');
+    bodyDataButton.addEventListener('click', function () {
+        bodyDataContainer.classList.toggle('not-active');
+    })
     var progress1 = new CircularProgress(charts, {fill: dark_color, width: 250, innerRadius: 250 / 2 * (9 / 10)});
     progress1.update([55]);
-    var stepText = document.getElementById("meter-text");
-    var exerciseContainer = document.getElementById('exercise-record');
-    var exerciseButton = document.getElementById('exercise-button');
     exerciseButton.addEventListener('click', function () {
         exerciseContainer.classList.toggle('not-active');
     });
-    var exerciseBack = document.getElementById('back');
     exerciseBack.addEventListener('click', function () {
         exerciseContainer.classList.toggle('not-active');
     });
 
+    startExerciseButton.addEventListener('click', function () {
+        startExerciseContainer.classList.toggle('not-active');
+    });
+    startExerciseBack.addEventListener('click', function () {
+        startExerciseContainer.classList.toggle('not-active');
+    });
     var connectButton = document.getElementById("connect");
-
+    bodyDataBack.addEventListener('click', function () {
+        bodyDataContainer.classList.toggle('not-active');
+    })
     const terminal = new BluetoothTerminal();
     connectButton.addEventListener('click', function () {
         terminal.connect().then(() => {
@@ -67,11 +87,23 @@ $(document).ready(function () {
         // console.log(data);
         if (data == "1") {
             currentStep++;
-        } else console.log(data)
+        } else if (data == "r") {
+
+        } else if (data == "ok_situp") {
+
+        } else if (data == "bad_situp") {
+
+        } else if (data == "ok_squat") {
+
+        } else if (data == "bad_squat") {
+
+        }
     };
     var updateHTMLCounter = setInterval(function () {
         stepText.innerHTML = (currentStep.toString() + "<br>steps");
+        if (currentExerciseStatus) {
 
+        }
     }, 500);
     var postCounter = setInterval(function () {
         let data = {
@@ -98,7 +130,7 @@ $(document).ready(function () {
                 label: '# of Votes',
                 data: [5000, 5500, 6000, 8000, 4500, 6500],
                 backgroundColor: [
-                    'rgba(0, 0, 0, 1)',
+                    dark_color,
                     /*'rgba(101, 97, 111, 1)',
                     'rgba(101, 97, 111, 1)',
                     'rgba(101, 97, 111, 1)',

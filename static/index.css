@@ -83,7 +83,7 @@ a:hover {
     color: var(--main-color);
     background-color: var(--main-dark-color);
     margin: 1vh;
-    border-radius: 10%;
+    border-radius: 10px;
 }
 
 #exercise-container-light {
@@ -91,7 +91,7 @@ a:hover {
     color: var(--main-dark-color);
     background-color: var(--shadow-color);
     margin: 1vh;
-    border-radius: 10%;
+    border-radius: 10px;
 }
 
 #meter-text {
@@ -101,6 +101,14 @@ a:hover {
     line-height: 20px;
 }
 
+.body-data-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2vh !important;
+    height: 7.5vh !important;
+}
+
 body {
-    overflow: scroll;
+    overflow: hidden;
 }
