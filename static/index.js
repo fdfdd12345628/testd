@@ -176,8 +176,8 @@ $(document).ready(function () {
         var stepCalories = document.getElementById('step-calories');
         progress1.update([parseInt(currentStep / 100)]);
         stepText.innerHTML = (currentStep.toString() + "<br>steps");
-        stepDistance.innerHTML = (currentStep * 0.00008).toFixed(3);
-        stepCalories.innerHTML = (currentStep * 0.1).toFixed(2);
+        stepDistance.innerHTML = (currentStep * 0.0008).toFixed(3);
+        stepCalories.innerHTML = (currentStep * 0.0001).toFixed(2);
         if (currentExerciseStatus == 1) {
             currentExerciseText.innerHTML = "Current Sit-Uping";
             if (currentExerciseOKorBad == 1) {
