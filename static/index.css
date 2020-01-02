@@ -60,7 +60,7 @@ a:hover {
 }
 
 .not-active {
-    display: none;
+    display: none !important;
 }
 
 .tab-container {
@@ -79,7 +79,7 @@ a:hover {
 }
 
 #exercise-container-dark {
-    height: 15vh;
+    height: 12vh;
     color: var(--main-color);
     background-color: var(--main-dark-color);
     margin: 1vh;
@@ -87,7 +87,7 @@ a:hover {
 }
 
 #exercise-container-light {
-    height: 15vh;
+    height: 12vh;
     color: var(--main-dark-color);
     background-color: var(--shadow-color);
     margin: 1vh;

@@ -1,7 +1,11 @@
-currentStep = 0;
-currentExerciseStep = 0;
-currentExerciseSpeed = '';
-currentExerciseStatus = 0;
+var currentStep = 0;
+var currentRunning = 0;
+
+var currentExerciseOKStep = 0;
+var currentExerciseBadStep = 0;
+var currentExerciseOKorBad = 0; // -1 for bad, 1 for ok
+var currentExerciseSpeed = '';
+var currentExerciseStatus = 0; // 0 for none, 1 for situp, 2 for squat, 3 for running
 $(document).ready(function () {
     var connected = false;
 
@@ -23,6 +27,11 @@ $(document).ready(function () {
     var bodyDataBack = document.getElementById('body-data-back');
     var bodyDataContainer = document.getElementById('body-data');
     var bodyDataButton = document.getElementById('body-data-button');
+
+    var startSquatButton = document.getElementsByClassName('start-squat')[0];
+    var startSitupButton = document.getElementsByClassName('start-situp')[0];
+    var startRunningButton = document.getElementsByClassName('start-running')[0];
+
     var dark_color = getComputedStyle(document.documentElement)
         .getPropertyValue('--main-dark-color');
     var userData = {}
@@ -75,7 +84,7 @@ $(document).ready(function () {
     bodyDataBack.addEventListener('click', function () {
         bodyDataContainer.classList.toggle('not-active');
     })
-    const terminal = new BluetoothTerminal();
+    let terminal = new BluetoothTerminal();
     connectButton.addEventListener('click', function () {
         terminal.connect().then(() => {
             connected = true
@@ -83,28 +92,126 @@ $(document).ready(function () {
 
     });
 
+    let endExerciseButton = document.getElementsByClassName('end-exercise')[0]
+    startSitupButton.addEventListener('click', function () {
+        currentExerciseStatus = 1;
+        currentExerciseBadStep = 0;
+        currentExerciseOKStep = 0;
+        startSquatButton.classList.toggle('not-active');
+        startSitupButton.classList.toggle('not-active');
+        startRunningButton.classList.toggle('not-active');
+        endExerciseButton.classList.toggle('not-active');
+    });
+
+    startSquatButton.addEventListener('click', function () {
+        currentExerciseStatus = 2;
+        currentExerciseOKStep = 0;
+        currentExerciseBadStep = 0;
+        startSquatButton.classList.toggle('not-active');
+        startSitupButton.classList.toggle('not-active');
+        startRunningButton.classList.toggle('not-active');
+        endExerciseButton.classList.toggle('not-active');
+    });
+
+    startRunningButton.addEventListener('click', function () {
+        currentExerciseStatus = 3;
+        currentExerciseBadStep = 0;
+        currentExerciseOKStep = 0;
+        startSquatButton.classList.toggle('not-active');
+        startSitupButton.classList.toggle('not-active');
+        startRunningButton.classList.toggle('not-active');
+        endExerciseButton.classList.toggle('not-active');
+    });
+
+    endExerciseButton.addEventListener('click', function () {
+        currentExerciseStatus = 0;
+        startSquatButton.classList.toggle('not-active');
+        startSitupButton.classList.toggle('not-active');
+        startRunningButton.classList.toggle('not-active');
+        endExerciseButton.classList.toggle('not-active');
+    });
+
     terminal.receive = function (data) {
-        // console.log(data);
+
+        console.log(data);
         if (data == "1") {
             currentStep++;
         } else if (data == "r") {
-
+            currentRunning++;
         } else if (data == "ok_situp") {
-
+            currentExerciseOKStep++;
         } else if (data == "bad_situp") {
-
+            currentExerciseBadStep++;
         } else if (data == "ok_squat") {
-
+            currentExerciseOKStep++;
         } else if (data == "bad_squat") {
-
+            currentExerciseBadStep++;
+        } else if (data == "fast") {
+            currentExerciseOKorBad = 3;
+        } else if (data == "slow") {
+            currentExerciseOKorBad = 4;
+        } else if (data == "good") {
+            currentExerciseOKorBad = 2;
         }
     };
     var updateHTMLCounter = setInterval(function () {
+        currentExerciseText = document.getElementById('current-exercise');
+        var currentExerciseStatusText = document.getElementById('exercise-status');
+        var exerciseDistanceText = document.getElementById('exercise-distance-text');
+        var exerciseDistance = document.getElementById('exercise-distance');
+        var exerciseDistanceUnit = document.getElementById('exercise-distance-unit');
+        var caloriesBurnedText = document.getElementById('calories-burned-text');
+        var caloriesBurned = document.getElementById('calories-burned');
+
         stepText.innerHTML = (currentStep.toString() + "<br>steps");
-        if (currentExerciseStatus) {
+        if (currentExerciseStatus == 1) {
+            currentExerciseText.innerHTML = "Current Sit-Uping";
+            if (currentExerciseOKorBad == 1) {
+                currentExerciseStatusText.innerHTML = "OK sit up";
+            } else if (currentExerciseOKorBad == -1) {
+                currentExerciseStatusText.innerHTML = "Bad sit up";
+            }
+            exerciseDistanceText.innerHTML = 'Sit-up count';
+            exerciseDistance.innerHTML = currentExerciseBadStep + currentExerciseOKStep;
+            exerciseDistanceUnit.innerHTML = 'time(s)';
+            caloriesBurned.innerHTML = ((currentExerciseOKStep + currentExerciseBadStep) * 0.07).toFixed(3);
 
         }
-    }, 500);
+        if (currentExerciseStatus == 2) {
+            currentExerciseText.innerHTML = "Current Squat";
+            if (currentExerciseOKorBad == 1) {
+                currentExerciseStatusText.innerHTML = "OK squat";
+            } else if (currentExerciseOKorBad == -1) {
+                currentExerciseStatusText.innerHTML = "Bad squat";
+            }
+            exerciseDistanceText.innerHTML = 'Squat count';
+            exerciseDistance.innerHTML = currentExerciseBadStep + currentExerciseOKStep;
+            exerciseDistanceUnit.innerHTML = 'time(s)';
+            caloriesBurned.innerHTML = ((currentExerciseOKStep + currentExerciseBadStep) * 0.09).toFixed(3);
+
+        }
+
+        if (currentExerciseStatus == 3) {
+            currentExerciseText.innerHTML = "Current Running";
+            if (currentExerciseOKorBad == 3) {
+                currentExerciseStatusText.innerHTML = "Fast";
+            } else if (currentExerciseOKorBad == 4) {
+                currentExerciseStatusText.innerHTML = "Slow";
+            } else if (currentExerciseOKorBad == 2) {
+                currentExerciseStatusText.innerText = "Good speed";
+            }
+            exerciseDistanceText.innerHTML = 'Distance';
+            exerciseDistance.innerHTML = ((currentExerciseBadStep + currentExerciseOKStep) * 0.08).toFixed(3);
+            exerciseDistanceUnit.innerHTML = 'km(s)';
+            caloriesBurned.innerHTML = ((currentExerciseOKStep + currentExerciseBadStep) * 0.02).toFixed(3);
+
+        }
+        if (currentExerciseStatus == 0) {
+            currentExerciseText.innerHTML = "Please select exercise";
+            currentExerciseStatusText.innerHTML = "";
+
+        }
+    }, 200);
     var postCounter = setInterval(function () {
         let data = {
             'steps': currentStep,
@@ -127,7 +234,7 @@ $(document).ready(function () {
         data: {
             labels: ['12/14', '12/15', '12/16', '12/17', '12/18', '12/19'],
             datasets: [{
-                label: '# of Votes',
+                label: '# of Steps',
                 data: [5000, 5500, 6000, 8000, 4500, 6500],
                 backgroundColor: [
                     dark_color,

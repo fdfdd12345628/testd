@@ -57,6 +57,11 @@
             </div>
         </div>
         <div class="container tab-pane active" id="date-container" style="">
+            <div class="row" style="display: flex; align-items: center; justify-content: center; font-size: 35px;">
+                History Chart
+                <br>
+                <br>
+            </div>
             <canvas id="chart">
 
             </canvas>
@@ -156,8 +161,9 @@
             </div>
         </nav>
         <div class="container">
-            <div class="row" style="height: 35vh">
-                Speed Correct
+            <div class="row" id="exercise-status"
+                 style="height: 35vh; display: flex; justify-content: center; align-items: center;font-size: 40px">
+
 
                 <!--div class="col"
                      style="height: 45vh; display: flex; justify-content: space-evenly; align-items: center;">
@@ -170,28 +176,45 @@
                     </div>
                 </div-->
             </div>
-            <div class="row">
+            <div class="row" id="current-exercise"
+                 style="display: flex; font-size: 20px;align-items: center; justify-content: center;">
                 Current running
+            </div>
+            <div class="row" id="" style="font-size: 30px">
+                <div class="col start-situp" id="exercise-container-light">
+                    Start situp
+                </div>
+                <div class="col start-squat" id="exercise-container-light">
+                    Start squat
+                </div>
+                <div class="col start-running" id="exercise-container-light">
+                    Start running
+                </div>
+                <div class="col not-active end-exercise" id="exercise-container-light"
+                     style="display:flex;align-items: center; justify-content: center;">
+                    End
+                </div>
             </div>
             <div class="row">
 
                 <div class="col" id="exercise-container-light"
                      style="display: flex; align-items: center; justify-content: space-around">
-                    <div style="position: absolute; top:5px; left: 5px">Running Distance</div>
-                    <div style="font-size: 30px">1.8</div>
-                    <div style="position: absolute; bottom: 5px;right: 5px;">km(s)</div>
+                    <div id="exercise-distance-text" style="position: absolute; top:5px; left: 5px">Running Distance
+                    </div>
+                    <div id="exercise-distance" style="font-size: 30px">0</div>
+                    <div id="exercise-distance-unit" style="position: absolute; bottom: 5px;right: 5px;">km(s)</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col" id="exercise-container-light"
                      style="display: flex; align-items: center; justify-content: space-around">
-                    <div style="position: absolute; top:5px; left: 5px">Calories Burned</div>
-                    <div style="font-size: 30px">400</div>
+                    <div id="calories-burned-text" style="position: absolute; top:5px; left: 5px">Calories Burned</div>
+                    <div id="calories-burned" style="font-size: 30px">0</div>
                     <div style="position: absolute; bottom: 5px;right: 5px;">kcal(s)</div>
                 </div>
 
             </div>
-            <div class="row">
+            <div class="row not-active">
 
                 <div class="col" id="exercise-container-light"
                      style="display: flex; align-items: center; justify-content: space-around">
