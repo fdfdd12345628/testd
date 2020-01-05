@@ -6,6 +6,10 @@ var currentExerciseBadStep = 0;
 var currentExerciseOKorBad = 0; // -1 for bad, 1 for ok
 var currentExerciseSpeed = '';
 var currentExerciseStatus = 0; // 0 for none, 1 for situp, 2 for squat, 3 for running
+
+var currentCountDown = false;
+var countDownEndTime = undefined;
+
 $(document).ready(function () {
     var connected = false;
 
@@ -31,6 +35,11 @@ $(document).ready(function () {
     var startSquatButton = document.getElementsByClassName('start-squat')[0];
     var startSitupButton = document.getElementsByClassName('start-situp')[0];
     var startRunningButton = document.getElementsByClassName('start-running')[0];
+
+    var countDownText = document.getElementById('count-down');
+    var fallOK = document.getElementsByClassName('fallOK')[0];
+    var fallNotOK = document.getElementsByClassName('fallNotOK')[0];
+    var fallingContainer = document.getElementById('falling');
 
     var dark_color = getComputedStyle(document.documentElement)
         .getPropertyValue('--main-dark-color');
@@ -142,7 +151,6 @@ $(document).ready(function () {
     });
 
     terminal.receive = function (data) {
-
         console.log(data);
         if (data == "1") {
             currentStep++;
@@ -162,8 +170,51 @@ $(document).ready(function () {
             currentExerciseOKorBad = 4;
         } else if (data == "good") {
             currentExerciseOKorBad = 2;
+        } else if (data == "falling") {
+            let nowTime = new Date();
+            nowTime.setSeconds(nowTime.getSeconds() + 10);
+            countDownEndTime = nowTime;
+            var countDown = setInterval(function () {
+                if (currentCountDown) {
+                    var now = new Date().getTime();
+
+                    // Find the distance between now and the count down date
+                    var distance = countDownEndTime - now;
+
+                    // Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // Display the result in the element with id="demo"
+                    countDownText.innerHTML = seconds + "s ";
+
+                    // If the count down is finished, write some text
+                    if (distance <= 0) {
+                        clearInterval(countDown);
+                        //document.getElementById("demo").innerHTML = "EXPIRED";
+                        fallingContainer.classList.toggle('not-active');
+                        terminal.send('already_fall');
+                    }
+                }
+            }, 1000);
+            currentCountDown = true;
+
+            fallingContainer.classList.toggle('not-active');
         }
     };
+    fallOK.addEventListener('click', function () {
+        currentCountDown = false;
+        fallingContainer.classList.toggle('not-active');
+        terminal.send('not_fall');
+
+    });
+    fallNotOK.addEventListener('click', function () {
+        currentCountDown = false;
+        fallingContainer.classList.toggle('not-active');
+        terminal.send('already_fall');
+    })
     var updateHTMLCounter = setInterval(function () {
         currentExerciseText = document.getElementById('current-exercise');
         var currentExerciseStatusText = document.getElementById('exercise-status');

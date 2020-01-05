@@ -1,6 +1,6 @@
 #include<SoftwareSerial.h>
 
-SoftwareSerial BT(11, 10); // 接收腳, 傳送腳
+SoftwareSerial BT(10, 11); // 接收腳, 傳送腳
 char val;  // 儲存接收資料的變數
 
 void setup() {
@@ -13,8 +13,13 @@ void setup() {
 }
 
 void loop() {
-    delay(500);
-    BT.println(1);
+    delay(12000);
+    BT.println("falling");
+    while(BT.available()){
+      Serial.write(BT.read());
+    }
+    
+    Serial.println("");
 }
 
 // {"step":1}
