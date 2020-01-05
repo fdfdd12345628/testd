@@ -24,7 +24,7 @@ self.addEventListener('install', function (event) {
             return cache.addAll([
                 /*'./static/idb.js',
                 './static/idbop.js',
-                './base_layout',
+
                 './manifest.json',
                 './static/src/worldwide-72.png',
                 'https://code.jquery.com/jquery-3.2.1.slim.min.js',
