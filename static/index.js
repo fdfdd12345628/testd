@@ -215,9 +215,9 @@ $(document).ready(function () {
                 currentExerciseStatusText.innerText = "Good speed";
             }
             exerciseDistanceText.innerHTML = 'Distance';
-            exerciseDistance.innerHTML = ((currentExerciseBadStep + currentExerciseOKStep) * 0.00008).toFixed(3);
+            exerciseDistance.innerHTML = ((currentRunning) * 0.00008).toFixed(3);
             exerciseDistanceUnit.innerHTML = 'km(s)';
-            caloriesBurned.innerHTML = ((currentExerciseOKStep + currentExerciseBadStep) * 0.02).toFixed(3);
+            caloriesBurned.innerHTML = ((currentRunning) * 0.02).toFixed(3);
 
         }
         if (currentExerciseStatus == 0) {
