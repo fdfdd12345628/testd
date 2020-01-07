@@ -1,8 +1,8 @@
 {
-  "name": "Summer Vue Demo",
-  "short_name": "summer_vue_demo",
-  "description": "demo pwa with django and vue.js",
-  "start_url": "/base_layout",
+  "name": "SPBelt",
+  "short_name": "SPBelt",
+  "description": "smart belt",
+  "start_url": "/",
   "scope": ".",
   "background_color": "#EEE",
   "theme_color": "#4A148C",
@@ -11,22 +11,22 @@
   "dir": "ltr",
   "icons": [
     {
-      "src": "./static/src/worldwide-72.png",
+      "src": "./static/src/icon-72.png",
       "type": "image/png",
       "sizes": "72x72"
     },
     {
-      "src": "./static/src/worldwide-144.png",
+      "src": "./static/src/icon-144.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "./static/src/worldwide-256.png",
+      "src": "./static/src/icon-256.png",
       "type": "image/png",
       "sizes": "256x256"
     },
     {
-      "src": "./static/src/worldwide-512.png",
+      "src": "./static/src/icon-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
