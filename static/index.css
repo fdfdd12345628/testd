@@ -35,8 +35,8 @@ a:hover {
     color: var(--main-dark-color);
     background: var(--shadow-color);
     border-radius: 35px;
-    height: 35vh;
-    margin: 25px;
+    height: 32vh;
+    margin: 3vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,8 +46,8 @@ a:hover {
     color: var(--main-bg-color);
     background: var(--main-dark-color);
     border-radius: 35px;
-    height: 35vh;
-    margin: 25px;
+    height: 32vh;
+    margin: 3vh;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -49,7 +49,7 @@ $(document).ready(function () {
         console.log(data);
         currentStep = data['current_walk']
 
-    })
+    });
     date_button.addEventListener('click', function () {
         if (date_button.classList.contains('active')) {
             date_container.classList.add('active')
@@ -73,7 +73,8 @@ $(document).ready(function () {
     });
     bodyDataButton.addEventListener('click', function () {
         bodyDataContainer.classList.toggle('not-active');
-    })
+    });
+    bodyDataContainer.style.cursor = 'pointer';
     var progress1 = new CircularProgress(charts, {fill: dark_color, width: 250, innerRadius: 250 / 2 * (9 / 10)});
     progress1.update([55]);
     exerciseButton.addEventListener('click', function () {
@@ -86,13 +87,15 @@ $(document).ready(function () {
     startExerciseButton.addEventListener('click', function () {
         startExerciseContainer.classList.toggle('not-active');
     });
+    startExerciseButton.style.cursor = 'pointer';
     startExerciseBack.addEventListener('click', function () {
         startExerciseContainer.classList.toggle('not-active');
     });
     var connectButton = document.getElementById("connect");
     bodyDataBack.addEventListener('click', function () {
         bodyDataContainer.classList.toggle('not-active');
-    })
+    });
+    connectButton.style.cursor = 'pointer';
     let terminal = new BluetoothTerminal();
     connectButton.addEventListener('click', function () {
         terminal.connect().then(() => {
@@ -194,14 +197,14 @@ $(document).ready(function () {
                     if (distance <= 0) {
                         clearInterval(countDown);
                         //document.getElementById("demo").innerHTML = "EXPIRED";
-                        fallingContainer.classList.toggle('not-active');
+                        fallingContainer.classList.remove('not-active');
                         terminal.send('already_fall');
                     }
                 }
             }, 1000);
             currentCountDown = true;
 
-            fallingContainer.classList.toggle('not-active');
+            fallingContainer.classList.add('not-active');
         }
     };
     fallOK.addEventListener('click', function () {
@@ -214,7 +217,8 @@ $(document).ready(function () {
         currentCountDown = false;
         fallingContainer.classList.toggle('not-active');
         terminal.send('already_fall');
-    })
+        window.open('tel:119');
+    });
     var updateHTMLCounter = setInterval(function () {
         currentExerciseText = document.getElementById('current-exercise');
         var currentExerciseStatusText = document.getElementById('exercise-status');
@@ -297,7 +301,7 @@ $(document).ready(function () {
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['12/14', '12/15', '12/16', '12/17', '12/18', '12/19'],
+            labels: ['1/2', '1/3', '1/4', '1/5', '1/6', '1/7'],
             datasets: [{
                 label: '# of Steps',
                 data: [5000, 5500, 6000, 8000, 4500, 6500],
